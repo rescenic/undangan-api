@@ -120,6 +120,10 @@ class CommentController extends Controller
 
     public function destroy(string $id, Request $request)
     {
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+        header("Access-Control-Allow-Headers: Origin, Content-Type, Accept, Authorization, Token");
+
         if ($request->get('id', '') !== env('JWT_KEY')) {
             return $this->json->error(['unauthorized'], 401);
         }
@@ -140,6 +144,7 @@ class CommentController extends Controller
             'status' => $status == 1
         ], 200);
     }
+
 
     public function create(Request $request)
     {
